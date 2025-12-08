@@ -1,54 +1,71 @@
-# Installation Guide - Termux Copilot CLI
+# Installation Guide
 
-## Prerequisites
-- Android device with Termux installed
-- ARM64 architecture (most modern Android devices)
-- ~500MB free storage
-- Internet connection
+## Quick Install (Recommended)
 
-## Step-by-Step Installation
+curl -fsSL https://raw.githubusercontent.com/reapercanuk39/termux-copilot-cli/main/install.sh | bash
 
-### 1. Update Termux Packages
-pkg update && pkg upgrade -y
+## Manual Installation
 
-### 2. Install Required Dependencies
-pkg install -y nodejs git python build-essential
+### Prerequisites
+- Node.js 16+ installed
+- Git installed
+- GitHub account with a personal access token
 
-### 3. Clone or Download Copilot CLI
-cd ~
-git clone https://github.com/copilot-cli/copilot-cli.git
-cd copilot-cli
+### Step 1: Clone the Repository
+
+git clone https://github.com/reapercanuk39/termux-copilot-cli.git
+cd termux-copilot-cli
+
+### Step 2: Install Dependencies
+
 npm install
 
-### 4. Install the Bypass Module
-mkdir -p ~/.copilot-hooks
-cp bypass-final.js ~/.copilot-hooks/
+### Step 3: Configure GitHub Token
 
-### 5. Configure Node to Load the Bypass
-Add this to your ~/.bashrc:
-export NODE_OPTIONS="--require /data/data/com.termux/files/home/.copilot-hooks/bypass-final.js"
+Create a .env file in your project directory:
 
-Then reload:
-source ~/.bashrc
+echo "GITHUB_TOKEN=your_github_token_here" > .env
 
-### 6. Verify Installation
-copilot --version
-copilot -p "Hello, test this"
+Or set it as an environment variable:
 
-## Troubleshooting Installation
+export GITHUB_TOKEN=your_github_token_here
 
-**Permission Denied Errors:**
-chmod +x ~/copilot-build/copilot-cli/bin/copilot.js
+### Step 4: Make CLI Global (Optional)
 
-**Module Not Found:**
-npm install --save-dev sharp child_process
+npm link
 
-**Node Version Issues:**
-nvm install 18
-nvm use 18
+## Usage
 
-## Success Indicators
-- No pne.fork is not a function errors
-- Copilot CLI responds to prompts
-- [BYPASS] Copilot Termux v2.0 appears in output
-- Code analysis works without crashes
+### Ask Copilot
+
+copilot ask "How do I create a function in JavaScript?"
+
+### Show Configuration
+
+copilot config
+
+### Show Version
+
+copilot version
+
+## Getting a GitHub Token
+
+1. Go to https://github.com/settings/tokens
+2. Click "Generate new token"
+3. Select "copilot" scope
+4. Copy the token and use it in your .env file
+
+## Troubleshooting
+
+Error: GITHUB_TOKEN not set
+- Make sure your .env file exists and contains GITHUB_TOKEN=your_token
+
+Error: Node.js not found
+- Install Node.js: pkg install nodejs (for Termux)
+
+Error: npm install fails
+- Try: npm install --no-optional
+
+## Support
+
+For issues and questions, visit: https://github.com/reapercanuk39/termux-copilot-cli/issues
