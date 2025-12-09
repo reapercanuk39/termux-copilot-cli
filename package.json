@@ -4,7 +4,7 @@
   "description": "A powerful command-line interface for GitHub Copilot optimized for Termux on Android devices",
   "main": "index.js",
   "bin": {
-    "copilot": "./index.js"
+    "win-bridge": "./index.js"
   },
   "scripts": {
     "start": "node index.js",
